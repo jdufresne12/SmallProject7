@@ -1,4 +1,5 @@
-body 
+/* Login page */
+.body 
 {
     margin: 0;
     height: 100vh;
@@ -8,7 +9,6 @@ body
     font-size: 18px;
     background-color: #6c1b86;
 }
-
 .box
 {
     background-color: lightblue;
@@ -24,12 +24,12 @@ body
     background: #6c1b86 !important;
 }
 
-
 #title 
 {
     font-size: 65px;
     width: 100%;
     text-align: center;
+    margin-top: 20px;
     font-family: 'Ubuntu', sans-serif;
     color: #FFFFFF;
 }
@@ -44,109 +44,171 @@ body
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: var(--border-radius);
     background: #FFFFFF;
+    
 }
 
 #inner-title{
     text-align: center;
-    margin-bottom: 3rem;
-    font-size: 50px;
+    font-size: 40px;
+    position: relative;
+    font-family: 'Monaco', monospace;
+    top: -5px;
 }
+
+#inner-title2{
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    font-family: 'Georgoa', serif;
+    top: 5px;
+}
+
+/* End login page */
 
 #text_group{
     margin-bottom: 1rem;
 }
 
-#firstName{
+.headingMessage{
+    background: white;
+    font-size: 65px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: black;
+}
+
+#phone{
     display: block;
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.90rem;
     box-sizing: border-box;
     border-radius: var(--border-radius);
     border: 1px solid #dddddd;
     outline: none;
     background: #eeeeee;
     transition: background 0.2s, border-color 0.2s;
+    margin-block: 15px;
+    font-size: 0.90rem;
+}
+
+#email{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    transition: background 0.2s, border-color 0.2s;
+    margin-block: 15px;
+    font-size: 0.90rem;
+}
+
+#firstName{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    transition: background 0.2s, border-color 0.2s;
+    margin-block: 15px;
+    font-size: 0.90rem;
 }
 
 #lastName{
     display: block;
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.90rem;
     box-sizing: border-box;
     border-radius: var(--border-radius);
     border: 1px solid #dddddd;
     outline: none;
     background: #eeeeee;
     transition: background 0.2s, border-color 0.2s;
+    margin-block: 15px;
+    font-size: 0.90rem;
 }
 
 #loginName{
     display: block;
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.90rem;
     box-sizing: border-box;
     border-radius: var(--border-radius);
     border: 1px solid #dddddd;
     outline: none;
     background: #eeeeee;
     transition: background 0.2s, border-color 0.2s;
+    border-spacing: 10px;
+    margin-block: 10px;
+    font-size: 0.90rem;
 }
 
 #loginPassword{
     display: block;
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.90rem;
     box-sizing: border-box;
     border-radius: var(--border-radius);
     border: 1px solid #dddddd;
     outline: none;
     background: #eeeeee;
     transition: background 0.2s, border-color 0.2s;
+    margin-block: 10px;
+    font-size: 0.90rem;
 }
 
 #firstName:focus{
     border-color: var(--color-primary);
     background: #ffffff;
+    margin-bottom: 7px;
 }
 
 #lastName:focus{
     border-color: var(--color-primary);
     background: #ffffff;
+    margin-bottom: 7px;
 }
 
 #loginName:focus{
     border-color: var(--color-primary);
     background: #ffffff;
+    margin-bottom: 7px;
 }
 
 #loginPassword:focus{
     border-color: var(--color-primary);
     background: #ffffff;
+    margin-bottom: 7px;
 }
 
 #loginButton{
-        font: 500 1rem 'Quicksand', sans-serif;
+    font: 500 1rem 'Quicksand', sans-serif;
 }
 
-#buttons
-{
+#loginButton{
     width: 100%;
     padding: 1rem 2rem;
     font-weight: bold;
     font-size: 1.1rem;
-    color: #ffffff;
+    color: #FFFFFF;
     border: none;
     border-radius: var(--border-radius);
     outline: none;
     cursor: pointer;
-    background: var(--color-primary);
+    background: #6c1b86;
 }
 
-#buttons:hover{
-    background: var(--color-primary-dark);
+#loginButton:hover{
+    background: #3e0c4f;
 }
 
-#buttons:active{
+#loginButton:active{
     transform: scale(0.98);
 }
 
@@ -160,13 +222,18 @@ body
     text-decoration: underline;
 }
 
+/* Contact Page */
+
 #loggedInDiv
 {
-    font-size: 30px;
-    width: 70%;
+    width: 400px;
+    max-width: 400px;
     margin: auto;
-    padding: 25px;
-    background-color: #D7CDC1;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
 }
 
 #accessUIDiv
@@ -175,7 +242,7 @@ body
     width: 70%;
     margin: auto;
     padding: 25px;
-    background-color: #D7CDC1;
+    background-color: #FFFFFF;
 }
 #searchText
 {
@@ -203,14 +270,36 @@ body
     margin-left: 5%;
     margin-bottom: 2%;
     font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+    color: #FFFFFF;
 }
 
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
+#searchName
+{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    transition: background 0.2s, border-color 0.2s;
+    border-spacing: 10px;
+    margin-block: 10px;
+    font-size: 0.90rem;
+}
+
+#searchButton{
+    width: 100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: #6c1b86;
 }
 
 #logoutButton{
@@ -225,6 +314,42 @@ select{
     font-size: 0.75em;
     font-family: 'Ubuntu', sans-serif;
 }
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+.searchBarDiv{
+    width: 150%;
+    position: relative;
+    display: flex;
+    text-align: center;
+}
+#searchBar{
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+}
+.wrap{
+    width: 30%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
 #colorSearchResult{
     display: none;
