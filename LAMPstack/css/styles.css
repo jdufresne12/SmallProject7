@@ -9,6 +9,22 @@ body
     background-color: #6c1b86;
 }
 
+.box
+{
+    background-color: lightblue;
+    border: 1px solid blue;
+    min-height: 50px;
+    font-size: 2rem;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: grey !important;
+}
+.modal-body
+{
+    background: #6c1b86 !important;
+}
+
+
 #title 
 {
     font-size: 65px;
