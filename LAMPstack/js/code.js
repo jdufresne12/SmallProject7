@@ -138,10 +138,6 @@ function register()
 				let jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.id;
 				window.location.href = "index.html";
-				if(firstName ==""){
-					document.getElementById("loginResult").innerHTML = "One or more fields missing";
-					return;
-				}
 			}
 		};
 		xhr.send(jsonPayload);

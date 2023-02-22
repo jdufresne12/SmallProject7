@@ -1,29 +1,29 @@
-<html>
-<head>
-	<title>SPG7 Contact Manager</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>SPG7 Contact Manager</title>
+		<script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="js/code.js"></script>
+		<link href="css/styles.css" rel="stylesheet">	
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <header class="headingMessage">SPG7 Contact Manager</header>
+	</head>
+	<body>
+        <br></br>
+		<div id="loginDiv">
+			<span id="inner-title">Login</span>
+			<div class="text_group">
+				<input type="text" id="loginName" autofocus placeholder="Username">
+			</div>
+			<div class="text_group">
+				<input type="password" id="loginPassword" autofocus placeholder="Password">
+			</div>
+			<button class="buttons" id="loginButton" onclick="doLogin();"> Continue </button>
+			<span id="loginResult"></span>
 
-<h1 id="title">SPG7 Contact Manager</h1>
-
-<div id="loginDiv">
-	<span id="inner-title">Login</span>
-	<div class="text_group">
-		<input type="text" id="loginName" autofocus placeholder="Username">
-	</div>
-	<div class="text_group">
-		<input type="password" id="loginPassword" autofocus placeholder="Password">
-	</div>
-	<button class="buttons" id="loginButton" onclick="doLogin();"> Continue </button>
-	<span id="loginResult"></span>
-
- <span id="text">Don't have an account? </span><a href="register.html">Create account</a>
-	<span id="regResult"></span>
-
-</div>
-</body>
+			<span id="inner-title2">Don't have an account? </span><a id="inner-title2" href="register.html">Create account</a>
+			<span id="regResult"></span>
+		</div>
+	</body>
 </html>
