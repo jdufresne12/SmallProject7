@@ -46,7 +46,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "color.html";
+				window.location.href = "userPage.html";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -142,7 +142,6 @@ function register()
 					document.getElementById("loginResult").innerHTML = "One or more fields missing";
 					return;
 				}
-				if()
 			}
 		};
 		xhr.send(jsonPayload);
