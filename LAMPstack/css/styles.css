@@ -8,6 +8,7 @@
     justify-content: center;
     font-size: 18px;
     background-color: #6c1b86;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
 }
 .box
 {
@@ -16,8 +17,20 @@
     min-height: 50px;
     font-size: 2rem;
 }
+
+.card{
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2) !important;
+}
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: grey !important;
+    background-color: white !important;
+    border-radius: 25px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    color: black !important;
+}
+
+.modal{
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2) !important;
 }
 .modal-body
 {
@@ -78,16 +91,41 @@
     color: black;
 }
 
+#createFirstName{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    margin-block: 15px;
+    font-size: 0.90rem;
+}
+
+#createLastName{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    margin-block: 15px;
+    font-size: 0.90rem;
+}
+
 #phone{
     display: block;
     width: 100%;
     padding: 0.90rem;
     box-sizing: border-box;
-    border-radius: var(--border-radius);
+    border-radius: 25px;
     border: 1px solid #dddddd;
     outline: none;
     background: #eeeeee;
-    transition: background 0.2s, border-color 0.2s;
     margin-block: 15px;
     font-size: 0.90rem;
 }
@@ -97,11 +135,10 @@
     width: 100%;
     padding: 0.90rem;
     box-sizing: border-box;
-    border-radius: var(--border-radius);
+    border-radius: 25px;
     border: 1px solid #dddddd;
     outline: none;
     background: #eeeeee;
-    transition: background 0.2s, border-color 0.2s;
     margin-block: 15px;
     font-size: 0.90rem;
 }
@@ -162,6 +199,14 @@
     margin-block: 10px;
     font-size: 0.90rem;
 }
+
+.formLabel{
+    font-size: 15px;
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #FFFFFF;
+}
+
 
 #firstName:focus{
     border-color: var(--color-primary);
@@ -366,3 +411,81 @@ select{
     font-family: 'Ubuntu', sans-serif;
     color: #95060a;
 }
+
+/* Login / Register Button Stuff */
+.form-box{
+  width: 380px;
+  height: 480px;
+  position: relative;
+  margin: 6% auto;
+  background: #fff;
+  padding: 5px;
+}
+
+.button-box{
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+}
+
+.toggle-btn{
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+#btn{
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 110px;
+  height: 100%;
+  background-color: linear-gradient(to right, #ff105f, #ffad06);
+  border-radius: 30px;
+  transition: .5s;
+}
+
+#login{
+  left: 50px;
+}
+
+#register{
+  left:50px;
+}
+
+#delete_edit_div{
+  display: inline-block;
+  text-align: center;
+}
+#deleteButton{
+  color:#ffffff;
+  background: #ff000b;
+  text-align: center;
+  border-radius: 25px;
+  border-width: 1px;
+}
+
+#deleteButton:hover{
+  color: #ff000b;
+  background: #ffffff;
+}
+
+#editButton{
+  color: #6c1b86;
+  fill: #b5b3b3;
+  text-align: center;
+  border-radius: 25px;
+  margin-left: 10px;
+  border-width: 1px;
+}
+
+#editButton:hover{
+  color: #6c1b86;
+  background: #6d6969;
+}
+
+/* End Login Register Button Stuff */

@@ -1,4 +1,4 @@
-const urlBase = 'http://spg7cop4331.com/LAMPAPI';
+const urlBase = 'https://spg7cop4331.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -10,7 +10,6 @@ function doLogin()
 	userId = 0;
 	firstName = "";
 	lastName = "";
-	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
 //	var hash = md5( password );
@@ -47,6 +46,7 @@ function doLogin()
 				saveCookie();
 	
 				window.location.href = "userPage.html";
+				displayAll();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -95,7 +95,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		//document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
@@ -163,6 +163,162 @@ function fieldCheck(){
 	}
 }
 
+function doCreateContact(){
+	debugger;
+    let firstname = document.getElementById("createFirstName").value;
+    let lastname = document.getElementById("createLastName").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+
+	let flag; //
+    let tmp = {firstname:firstname, lastname:lastname, email:email, phone:phone, userid:userId}
+    let jsonPayload = JSON.stringify( tmp );
+    let url = urlBase + '/CreateContacts.' + extension;
+    let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if(xhr.readyState == 4 && xhr.status == 200){
+				console.log(JSON.parse(xhr.responseText));
+				window.location.href='userPage.html'
+			} 
+			if(xhr.status==409){
+				doOpenModal();
+				console.log(`Error: ${xhr.status}`);
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err){
+
+	}
+}
+
+function doOpenModal(){
+	$('#createContactModal').modal('hide')
+	$('#createContactModal').on('hidden.bs.modal', function () {
+		// Load up a new modal...
+		$('#createError').modal('show')
+	  })
+}
+
+function displayAll(){
+	debugger;
+	let contactObj; //get data from xhr.response
+	let search ='';
+	const tableBody = document.getElementById("contactsTable-Body"); //reference table body
+	let tmp = {userid:userId, search:search};
+	let jsonPayload = JSON.stringify(tmp);
+	let url = urlBase + '/ReadContacts.' + extension;
+	let xhr = new XMLHttpRequest();
+	xhr.open('POST', url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200){
+				contactObj = JSON.parse( xhr.responseText );
+				if(contactObj.contactcount==0){
+					displayNone(contactObj, tableBody)
+				}
+				else{
+					displayAllHelper(contactObj, tableBody);
+				}
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err){
+
+	}
+	  
+}
+
+function displayNone(contactObj, tablebody){
+	let row = document.createElement("tr");
+	let noContacts = document.createElement("td");
+	noContacts.innerText = "No contacts yet, make some friends!";
+	row.appendChild(noContacts);
+	tableBody.appendChild(row);
+}
+
+/**
+ * Function does xys
+ * @param {*} contactObj - param holds x information 
+ * @param {*} tableBody - holds taBle body elem
+ */
+function displayAllHelper(contactObj, tableBody){
+	
+	for(let i=0; i < contactObj.contactcount; i++){
+		// Create a new row element
+		let row = document.createElement("tr");
+		// Create a new cell for each property in the object
+		let firstname = document.createElement("td");
+		firstname.innerText = contactObj.contacts[i].firstname;
+		let lastname = document.createElement("td");
+		lastname.innerText =  contactObj.contacts[i].lastname;
+		let email = document.createElement("td");
+		email.innerText =  contactObj.contacts[i].email;
+		let phone = document.createElement("td");
+		phone.innerText = contactObj.contacts[i].phone;
+
+        let deleteTD = document.createElement("td");
+        let delete_edit_div = document.createElement("div");
+        delete_edit_div.classList.add('delete_edit_div');
+
+        //Delete Button
+		let deleteButton = document.createElement("button");
+        deleteButton.id = 'deleteButton';
+        deleteButton.rel = 'stylesheet';
+        deleteButton.href = "css/styles.css";
+        deleteButton.classList.add('deleteButton');
+        deleteButton.innerText = "Delete";
+        deleteButton.setAttribute('type','button');
+        deleteButton.setAttribute('value','Delete');
+        //deleteButton.setAttribute('onclick', 'doDelete()');
+        delete_edit_div.appendChild(deleteButton);
+
+        //Edit Button
+        let editTD = document.createElement("td");
+        let editButton = document.createElement('button');
+        editButton.classList.add("editButton");
+        editButton.id = 'editButton';
+        editButton.rel = 'stylesheet';
+        editButton.type = 'text/css';
+        editButton.href = 'css/styles.css';
+        editButton.innerText = ". . .";
+        editButton.setAttribute('type','button');
+        editButton.setAttribute('value','Edit');
+        //editButton.setAttribute('onclick', 'doEdit()');
+        delete_edit_div.appendChild(editButton);
+
+        deleteTD.appendChild(delete_edit_div);
+
+		// Add the cells to the row
+		row.appendChild(firstname);
+		row.appendChild(lastname);
+        row.appendChild(phone);
+		row.appendChild(email);
+        row.appendChild(deleteTD);
+        //row.appendChild(editTD);
+        tableBody.appendChild(row);
+	}   
+    //alert(window.location.pathname);
+}
+
+function doDelete()
+{
+
+}
+
+function doEdit()
+{
+
+}
 
 function addColor()
 {
@@ -237,5 +393,4 @@ function searchColor()
 	{
 		document.getElementById("colorSearchResult").innerHTML = err.message;
 	}
-	
 }
