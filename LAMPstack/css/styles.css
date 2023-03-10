@@ -28,6 +28,12 @@
     font-family: 'Ubuntu', sans-serif !important;
     color: black !important;
 }
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+    background-color: rgb(131, 131, 131) !important;
+    /*border-radius: 25px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    color: black !important;*/
+}
 
 .modal{
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2) !important;
@@ -462,25 +468,23 @@ select{
   text-align: center;
 }
 #deleteButton{
-  color:#ffffff;
-  background: #ff000b;
+  color:#ff000b;
+  background-color: #ffffff;
   text-align: center;
-  border-radius: 25px;
-  border-width: 1px;
+  border: none;
 }
 
 #deleteButton:hover{
   color: #ff000b;
-  background: #ffffff;
+  background: #6d6969;
 }
 
 #editButton{
   color: #6c1b86;
-  fill: #b5b3b3;
+  background-color: #ffffff;
   text-align: center;
-  border-radius: 25px;
   margin-left: 10px;
-  border-width: 1px;
+  border: none;
 }
 
 #editButton:hover{

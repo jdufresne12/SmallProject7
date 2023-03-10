@@ -164,7 +164,6 @@ function fieldCheck(){
 }
 
 function doCreateContact(){
-	debugger;
     let firstname = document.getElementById("createFirstName").value;
     let lastname = document.getElementById("createLastName").value;
     let phone = document.getElementById("phone").value;
@@ -206,10 +205,10 @@ function doOpenModal(){
 }
 
 function displayAll(){
-	debugger;
 	let contactObj; //get data from xhr.response
 	let search ='';
-	const tableBody = document.getElementById("contactsTable-Body"); //reference table body
+	let tableHeader = document.getElementById("contactsTable_Header")
+	let tableBody = document.getElementById("contactsTable-Body"); //reference table body
 	let tmp = {userid:userId, search:search};
 	let jsonPayload = JSON.stringify(tmp);
 	let url = urlBase + '/ReadContacts.' + extension;
@@ -222,23 +221,21 @@ function displayAll(){
 		{
 			if (this.readyState == 4 && this.status == 200){
 				contactObj = JSON.parse( xhr.responseText );
-				if(contactObj.contactcount==0){
-					displayNone(contactObj, tableBody)
-				}
-				else{
-					displayAllHelper(contactObj, tableBody);
-				}
+				displayAllHelper(contactObj, tableHeader, tableBody);
 			}
+            else if(this.readyState == 4 && this.status == 404){
+                displayNone(tableBody)
+            }
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err){
-
+        displayNone(tableBody);
 	}
 	  
 }
 
-function displayNone(contactObj, tablebody){
+function displayNone(tableBody){
 	let row = document.createElement("tr");
 	let noContacts = document.createElement("td");
 	noContacts.innerText = "No contacts yet, make some friends!";
@@ -246,16 +243,35 @@ function displayNone(contactObj, tablebody){
 	tableBody.appendChild(row);
 }
 
-/**
- * Function does xys
- * @param {*} contactObj - param holds x information 
- * @param {*} tableBody - holds taBle body elem
- */
-function displayAllHelper(contactObj, tableBody){
-	
+function displayTableHeader(tableHeader){
+	debugger;
+    let row = document.createElement("tr");
+    let firstname = document.createElement("th");
+    firstname.innerText = "First Name";
+    let lastname = document.createElement("th");
+    lastname.innerText = "Last Name";
+    let email = document.createElement("th");
+    email.innerText =  "Email";
+    let phone = document.createElement("th");
+    phone.innerText = "Phone";
+    let delete_edit = document.createElement("th");
+    delete_edit.innerText = "";
+
+    row.appendChild(firstname);
+    row.appendChild(lastname);
+    row.appendChild(email);
+    row.appendChild(phone);
+    row.appendChild(delete_edit);
+	tableHeader.appendChild(row);
+}
+
+function displayAllHelper(contactObj, tableHeader, tableBody){
+	debugger;
+	displayTableHeader(tableHeader);
 	for(let i=0; i < contactObj.contactcount; i++){
 		// Create a new row element
 		let row = document.createElement("tr");
+		
 		// Create a new cell for each property in the object
 		let firstname = document.createElement("td");
 		firstname.innerText = contactObj.contacts[i].firstname;
@@ -273,27 +289,55 @@ function displayAllHelper(contactObj, tableBody){
         //Delete Button
 		let deleteButton = document.createElement("button");
         deleteButton.id = 'deleteButton';
-        deleteButton.rel = 'stylesheet';
-        deleteButton.href = "css/styles.css";
-        deleteButton.classList.add('deleteButton');
-        deleteButton.innerText = "Delete";
+        deleteButton.classList.add("deleteButton");
         deleteButton.setAttribute('type','button');
         deleteButton.setAttribute('value','Delete');
         //deleteButton.setAttribute('onclick', 'doDelete()');
-        delete_edit_div.appendChild(deleteButton);
+		//trashcan image
+		let trashcan = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		let trashcanPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		trashcan.setAttribute('width','24');
+		trashcan.setAttribute('height','24');
+		trashcan.setAttribute('fill', 'currentColor');
+		trashcan.setAttribute('class', 'bi bi-trash-fill');
+		trashcan.setAttribute('viewBox', '0 0 16 16');
+		trashcanPath.setAttribute(
+			'd',
+			'M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'
+		  );
+		trashcan.appendChild(trashcanPath);
+		deleteButton.appendChild(trashcan);
 
         //Edit Button
-        let editTD = document.createElement("td");
         let editButton = document.createElement('button');
         editButton.classList.add("editButton");
         editButton.id = 'editButton';
-        editButton.rel = 'stylesheet';
-        editButton.type = 'text/css';
-        editButton.href = 'css/styles.css';
-        editButton.innerText = ". . .";
         editButton.setAttribute('type','button');
         editButton.setAttribute('value','Edit');
         //editButton.setAttribute('onclick', 'doEdit()');
+		//edit Icon image
+		let editIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		let editIconPath1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		let editIconPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		editIcon.setAttribute('width','24');
+		editIcon.setAttribute('height','24');
+		editIcon.setAttribute('fill', 'currentColor');
+		editIcon.setAttribute('class', 'bi bi-pencil-square');
+		editIcon.setAttribute('viewBox', '0 0 16 16');
+		editIconPath1.setAttribute(
+			'd',
+			'M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'
+			);
+		editIconPath2.setAttribute('fill-rule', 'evenodd');
+		editIconPath2.setAttribute(
+			'd',
+			'M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'
+			);	
+		editIcon.appendChild(editIconPath1);
+		editIcon.appendChild(editIconPath2);
+		editButton.appendChild(editIcon);
+
+		delete_edit_div.appendChild(deleteButton);
         delete_edit_div.appendChild(editButton);
 
         deleteTD.appendChild(delete_edit_div);
@@ -304,7 +348,6 @@ function displayAllHelper(contactObj, tableBody){
         row.appendChild(phone);
 		row.appendChild(email);
         row.appendChild(deleteTD);
-        //row.appendChild(editTD);
         tableBody.appendChild(row);
 	}   
     //alert(window.location.pathname);
@@ -320,16 +363,16 @@ function doEdit()
 
 }
 
-function addColor()
+function doSearch()
 {
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	let tmp = {color:newColor,userId,userId};
+	$("#contactsTable tr").remove();
+	let tableHeader = document.getElementById("contactsTable_Header")
+    let tableBody = document.getElementById("contactsTable-Body");
+	let srch = document.getElementById("search").value;
+    let contactObject;
+	let tmp = {userid:userId, search:srch};
 	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/AddColor.' + extension;
-	
+	let url = urlBase + '/ReadContacts.' + extension;
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -337,60 +380,19 @@ function addColor()
 	{
 		xhr.onreadystatechange = function() 
 		{
-			if (this.readyState == 4 && this.status == 200) 
+			if(this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-	
-}
-
-function searchColor()
-{
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
-	
-	let colorList = "";
-
-	let tmp = {search:srch,userId:userId};
-	let jsonPayload = JSON.stringify( tmp );
-
-	let url = urlBase + '/SearchColors.' + extension;
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
-				let jsonObject = JSON.parse( xhr.responseText );
-				
-				for( let i=0; i<jsonObject.results.length; i++ )
-				{
-					colorList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						colorList += "<br />\r\n";
-					}
-				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("colorSearchResult").innerHTML = err.message;
-	}
+				contactObject = JSON.parse( xhr.responseText );
+				displayAllHelper(contactObject, tableHeader, tableBody);
+		    }
+            else if(this.readyState == 4 && this.status == 404){
+                displayNone(tableBody);
+            }
+	    }
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        displayNone(contactObject, tableBody);
+    }   
 }
