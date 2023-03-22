@@ -62,12 +62,12 @@
                                 <h1>Create New Contact</h1>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form><!--class="needs-validation">-->
                                     <div class="form-floating">
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="createFirstName">First Name:</label>
-                                        <input type="text" class="form-control" id="createFirstName" placeholder="e.g. Joe">
-                                        <div class="invalid-feedback">Need First Name</div>
+                                        <input type="text" class="form-control" id="createFirstName" placeholder="e.g. Joe" required>
+                                        <!--<div class="invalid-feedback">Please enter name</div>-->
                                         </div>
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="createLastName">Last Name</label>
@@ -75,13 +75,13 @@
                                         </div>
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="phone">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" placeholder="e.g. 1-800-888-8888">
-                                        <div class="invalid-feedback">Invalid Number</div>
+                                        <input type="tel" class="form-control" id="phone" placeholder="e.g. 1-800-888-8888" required>
+                                        <!--<div class="invalid-feedback">Please enter Number</div>-->
                                         </div>
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="e.g. JoeMama@email.com">
-                                        <div class="invalid-feedback">Invalid Email</div>
+                                        <input type="email" class="form-control" id="email" placeholder="e.g. JoeMama@email.com" required>
+                                        <!--<div class="invalid-feedback">Please enter email</div>-->
                                         </div>
                                     </div>
                                     <div class="d-block justify-content-center">
@@ -120,10 +120,12 @@
     </div>
     <!--<script>
         //Script to validate email and phone
-        const form = document.querySelector("form")
+        'use strict'
+        const form = document.querySelector('.needs-validation')
         form.addEventListener('submit', e => {
             if(!form.checkValidity()){
                 e.preventDefault()
+                e.stopPropagation()
             }
             form.classList.add('was-validated')
         })

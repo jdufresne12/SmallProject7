@@ -5,6 +5,7 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+
 function doLogin()
 {
 	userId = 0;
@@ -47,6 +48,9 @@ function doLogin()
 	
 				window.location.href = "userPage.html";
 				displayAll();
+			}
+			else if (this.readyState == 4 && this.status != 200){
+				document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -110,8 +114,14 @@ function doLogout()
 
 function register()
 {
-	console.log();
+	//alert("oi");
 	//Initialize data
+
+	if(!fieldCheck())
+	{
+		return;
+	}
+
 	userId = 0;
 	firstName = document.getElementById("firstName").value;
 	lastName = document.getElementById("lastName").value;
@@ -119,8 +129,8 @@ function register()
 	let password = document.getElementById("loginPassword").value;
 
 	let tmp = {
-		firstName:firstName,
-		lastName:lastName,
+		firstname:firstName,
+		lastname:lastName,
 		login:login,
 		password:password
 	};
@@ -135,9 +145,13 @@ function register()
 		{
 			if (this.readyState == 4 && this.status == 200) //api successfully connected
 			{
+				window.location.href = "index.html";
 				let jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.id;
-				window.location.href = "index.html";
+				
+			}
+			else if (this.readyState == 4 && this.status == 409){
+				document.getElementById("loginResult").innerHTML = "UserName already exists"
 			}
 		};
 		xhr.send(jsonPayload);
@@ -146,6 +160,8 @@ function register()
 	{
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
+
+	
 }
 
 function fieldCheck(){
@@ -155,11 +171,12 @@ function fieldCheck(){
 	let password = document.getElementById("loginPassword").value;
 	if(firstName=="" || lastName=="" || login=="" || password==""){
 		document.getElementById("loginResult").innerHTML = "One or more fields missing";
-		return;
+		return false;
 	}
 	else{
-		register();
+		//register();
 		document.getElementById("loginResult").innerHTML = "";
+		return true;
 	}
 }
 
@@ -182,9 +199,9 @@ function doCreateContact(){
 		{
 			if(xhr.readyState == 4 && xhr.status == 200){
 				console.log(JSON.parse(xhr.responseText));
-				window.location.href='userPage.html'
+				window.location.href='userPage.html';
 			} 
-			if(xhr.status==409){
+			else if(xhr.readyState == 4 && xhr.status==409){
 				doOpenModal();
 				console.log(`Error: ${xhr.status}`);
 			}
@@ -192,7 +209,8 @@ function doCreateContact(){
 		xhr.send(jsonPayload);
 	}
 	catch(err){
-
+		console.log('Error:'+err);
+        alert("hello not working22");
 	}
 }
 
@@ -251,9 +269,9 @@ function displayTableHeader(tableHeader){
     let lastname = document.createElement("th");
     lastname.innerText = "Last Name";
     let email = document.createElement("th");
-    email.innerText =  "Email";
+    email.innerText =  "Phone";
     let phone = document.createElement("th");
-    phone.innerText = "Phone";
+    phone.innerText = "email";
     let delete_edit = document.createElement("th");
     delete_edit.innerText = "";
 
@@ -290,9 +308,10 @@ function displayAllHelper(contactObj, tableHeader, tableBody){
 		let deleteButton = document.createElement("button");
         deleteButton.id = 'deleteButton';
         deleteButton.classList.add("deleteButton");
+
         deleteButton.setAttribute('type','button');
         deleteButton.setAttribute('value','Delete');
-        //deleteButton.setAttribute('onclick', 'doDelete()');
+        //deleteButton.setAttribute('onclick', doDelete(contactObj.contacts[i].contactId));
 		//trashcan image
 		let trashcan = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 		let trashcanPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -307,6 +326,8 @@ function displayAllHelper(contactObj, tableHeader, tableBody){
 		  );
 		trashcan.appendChild(trashcanPath);
 		deleteButton.appendChild(trashcan);
+        deleteButton.addEventListener("click", function(){doDelete(contactObj.contacts[i].id);});
+        //addEventListener('deleteButton', )
 
         //Edit Button
         let editButton = document.createElement('button');
@@ -353,9 +374,34 @@ function displayAllHelper(contactObj, tableHeader, tableBody){
     //alert(window.location.pathname);
 }
 
-function doDelete()
-{
+function clickDeleteButton(contactId){
+    
+}
 
+function doDelete(deleteParam)
+{
+	let temp = {userid:userId,contactid:deleteParam};
+	let jsonPayload = JSON.stringify(temp);
+	let url = urlBase + '/DeleteContacts.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try{
+		xhr.onreadystatechange = function()
+		{
+			if(this.readyState == 4 && this.status == 200)
+			{
+                doSearch();
+			}
+			
+		}
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		//document.getElementById("colorAddResult").innerHTML = err.message;
+	}
 }
 
 function doEdit()
@@ -370,7 +416,7 @@ function doSearch()
     let tableBody = document.getElementById("contactsTable-Body");
 	let srch = document.getElementById("search").value;
     let contactObject;
-	let tmp = {userid:userId, search:srch};
+	let tmp = {userid:userId, search:srch,perpage:100,page:1};
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/ReadContacts.' + extension;
 	let xhr = new XMLHttpRequest();

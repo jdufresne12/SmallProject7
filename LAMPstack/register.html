@@ -1,35 +1,30 @@
-<html>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width+50, initial-scale=1">
-<head>
-	<title>SPG7 Contact Manager</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-</head>
-<body>
-
-<h1 id="title">SPG7 Contact Manager</h1>
-
-<div id="loginDiv">
-	<span id="inner-title">Create Account</span>
-	<div class="text_group">
-		<input type="text" id="firstName" autofocus placeholder="First Name">
-		<input type="text" id="lastName" autofocus placeholder="Last Name">
-		<input type="text" id="loginName" autofocus placeholder="Username">
-	</div>
-	<div class="text_group">
-		<input type="password" id="loginPassword" autofocus placeholder="Password">
-	</div>
-	<button class="buttons" id="loginButton" onclick="fieldCheck();"> Continue </button>
-	<span id="loginResult"></span>
-
- <span id="text">Already have an account? </span><a href="index.html">Sign in</a>
-	<span id="regResult"></span>
-
-</div>
-
-</body>
-
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SPG7 Contact Manager</title>
+        <script type="text/javascript" src="js/md5.js"></script>
+        <script type="text/javascript" src="js/code.js"></script>
+        <link href="css/styles.css" rel="stylesheet">	
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <header class="headingMessage">SPG7 Contact Manager</header>
+    </head>
+    <body>
+        <br></br>
+        <div id="loginDiv">
+            <span id="inner-title">Create Account</span>
+            <form>
+                <div class="text_group">
+                    <input type="text" id="firstName" autofocus placeholder="First Name"required>
+                    <input type="text" id="lastName" autofocus placeholder="Last Name"required>
+                    <input type="text" id="loginName" autofocus placeholder="Username"required>
+                    <input type="password" id="loginPassword" autofocus placeholder="Password"required>
+                </div>
+                <button class="buttons" type="submit" id="loginButton" onclick="register()"> Continue </button>
+                <span id="loginResult"></span>
+            </form>
+        <span id="inner-title2">Already have an account? </span><a id="inner-title2" href="index.html">Sign in</a>
+        <span id="regResult"></span>
+        </div>
+    </body>
 </html>

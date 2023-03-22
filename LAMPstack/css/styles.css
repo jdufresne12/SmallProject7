@@ -321,7 +321,7 @@
     margin-left: 5%;
     margin-bottom: 2%;
     font-family: 'Ubuntu', sans-serif;
-    color: #FFFFFF;
+    color: #d51c1c;
 }
 
 #searchName
@@ -419,6 +419,20 @@ select{
 }
 
 /* Login / Register Button Stuff */
+
+#registerDiv
+{
+    width: 400px;
+    max-width: 400px;
+    left: 450px
+    margin: auto;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #FFFFFF;
+    
+}
 .form-box{
   width: 380px;
   height: 480px;
@@ -430,9 +444,9 @@ select{
 
 .button-box{
   width: 220px;
-  margin: 35px auto;
+  margin: 20px auto;
   position: relative;
-  box-shadow: 0 0 20px 9px #ff61241f;
+  box-shadow: 0 0 20px 9px #FF61241F;
   border-radius: 30px;
 }
 
@@ -450,7 +464,7 @@ select{
   position: absolute;
   width: 110px;
   height: 100%;
-  background-color: linear-gradient(to right, #ff105f, #ffad06);
+  background-color: rgb(131, 131, 131);
   border-radius: 30px;
   transition: .5s;
 }
@@ -491,5 +505,77 @@ select{
   color: #6c1b86;
   background: #6d6969;
 }
+
+#userName{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    transition: background 0.2s, border-color 0.2s;
+    border-spacing: 10px;
+    margin-block: 10px;
+    font-size: 0.90rem;
+}
+
+#userPassword{
+    display: block;
+    width: 100%;
+    padding: 0.90rem;
+    box-sizing: border-box;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddddd;
+    outline: none;
+    background: #eeeeee;
+    transition: background 0.2s, border-color 0.2s;
+    margin-block: 10px;
+    font-size: 0.90rem;
+}
+
+#registerButton{
+    font: 500 1rem 'Quicksand', sans-serif;
+}
+
+#registerButton{
+    width: 100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: #6c1b86;
+}
+
+#registerButton:hover{
+    background: #3e0c4f;
+}
+
+#registerButton:active{
+    transform: scale(0.98);
+}
+
+.inputForm{
+  top: 180px;
+  position: absolute;
+  width: 280px;
+  transition: .5s;
+}
+
+#login
+{
+  left: 50px;
+}
+
+#register
+{
+  left: 450px;
+}
+
 
 /* End Login Register Button Stuff */
