@@ -62,12 +62,12 @@
                                 <h1>Create New Contact</h1>
                             </div>
                             <div class="modal-body">
-                                <form><!--class="needs-validation">-->
+                                <form class="needs-validation">
                                     <div class="form-floating">
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="createFirstName">First Name:</label>
                                         <input type="text" class="form-control" id="createFirstName" placeholder="e.g. Joe" required>
-                                        <!--<div class="invalid-feedback">Please enter name</div>-->
+                                        <div class="invalid-feedback">Please enter name</div>
                                         </div>
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="createLastName">Last Name</label>
@@ -76,35 +76,23 @@
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="phone">Phone Number</label>
                                         <input type="tel" class="form-control" id="phone" placeholder="e.g. 1-800-888-8888" required>
-                                        <!--<div class="invalid-feedback">Please enter Number</div>-->
+                                        <div class="invalid-feedback">Please enter Number</div>
                                         </div>
                                         <div class="form-group col-8">
                                         <label class="formLabel" for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="e.g. JoeMama@email.com" required>
-                                        <!--<div class="invalid-feedback">Please enter email</div>-->
+                                        <input type="email" class="form-control" id="email" placeholder="e.g. JoeMama@email.com" required autofocus>
+                                        <div class="invalid-feedback">Please enter email</div>
                                         </div>
                                     </div>
                                     <div class="d-block justify-content-center">
-                                        <button type="submit" class="btn btn-primary active" onclick="doCreateContact()">Create</button></div>
+                                        <button type="button" class="btn btn-primary active" onclick="doCreateContact()">Create</button></div>
+                                        <span id="createContactResult"></span>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="createError" tabindex="-1" role="dialog" aria-labelledby="#createError" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="createError">Error: Email/Phone-number already linked to another contact</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <br></br><!--Card for table of contacts-->
             <div class="card">
                 <div class="cardbody">
@@ -119,16 +107,27 @@
         </div>
     </div>
     <!--<script>
-        //Script to validate email and phone
-        'use strict'
-        const form = document.querySelector('.needs-validation')
-        form.addEventListener('submit', e => {
-            if(!form.checkValidity()){
-                e.preventDefault()
-                e.stopPropagation()
-            }
-            form.classList.add('was-validated')
-        })
+        // //Script to validate email and phone
+        // 'use strict'
+        // const form = document.querySelector('.needs-validation')
+        // form.addEventListener('submit', e => {
+        //     if(!form.checkValidity()){
+        //         e.preventDefault()
+        //         e.stopPropagation()
+        //     }
+        //     form.classList.add('was-validated')
+        // })
+        window.addEventListener("load", function () {
+       //not jquery!
+       // Access the form element...
+       var form = document.getElementById(".needs-validation");
+
+       // ...and take over its submit event.
+       form.addEventListener("submit", function (event) {
+            event.preventDefault(); // prevent form submission and reloading the page.
+            Register();
+       });
+   });
     </script>-->
 </body>
 </html>

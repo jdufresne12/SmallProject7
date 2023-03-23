@@ -114,9 +114,6 @@ function doLogout()
 
 function register()
 {
-	//alert("oi");
-	//Initialize data
-
 	if(!fieldCheck())
 	{
 		return;
@@ -186,7 +183,6 @@ function doCreateContact(){
     let phone = document.getElementById("phone").value;
     let email = document.getElementById("email").value;
 
-	let flag; //
     let tmp = {firstname:firstname, lastname:lastname, email:email, phone:phone, userid:userId}
     let jsonPayload = JSON.stringify( tmp );
     let url = urlBase + '/CreateContacts.' + extension;
@@ -199,18 +195,27 @@ function doCreateContact(){
 		{
 			if(xhr.readyState == 4 && xhr.status == 200){
 				console.log(JSON.parse(xhr.responseText));
+				//alert("Hello?");
 				window.location.href='userPage.html';
 			} 
 			else if(xhr.readyState == 4 && xhr.status==409){
-				doOpenModal();
-				console.log(`Error: ${xhr.status}`);
+				//etTimeout(alert("coopy"),10000);
+				let errorObj = JSON.parse(xhr.responseText);
+				errorObj.errordescription = errorObj.errordescription.toLowerCase();
+				if(errorObj.errordescription.includes("contacts.uc_email"))
+				{
+					document.getElementById("createContactResult").innerHTML = "Email already exists";
+				}
+				else
+				{
+					document.getElementById("createContactResult").innerHTML = "Phone number already exists";
+				}
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err){
-		console.log('Error:'+err);
-        alert("hello not working22");
+		//setTimeout(alert("But y"), 10000);
 	}
 }
 
